@@ -1,0 +1,413 @@
+{
+ "_note": "Approximate centre points of well-known places, used to place markers more precisely than the province centre. Aliases are matched against the post text, location_text and district. Ambiguous everyday words (e.g. ฉลอง = 'celebrate', สาคู = 'sago') are only matched with a place prefix.",
+ "places": [
+  {
+   "id": "patong",
+   "province": "Phuket",
+   "district": "Kathu",
+   "name": "Patong",
+   "lat": 7.8966,
+   "lon": 98.2966,
+   "aliases": [
+    "ป่าตอง",
+    "patong",
+    "pa tong",
+    "หาดป่าตอง",
+    "บางลา",
+    "bangla"
+   ],
+   "unique": true,
+   "level": "area"
+  },
+  {
+   "id": "na-nai",
+   "province": "Phuket",
+   "district": "Kathu",
+   "name": "Soi Na Nai, Patong",
+   "lat": 7.8935,
+   "lon": 98.3035,
+   "aliases": [
+    "นาใน",
+    "na nai",
+    "nanai",
+    "ซอยนาใน"
+   ],
+   "unique": true,
+   "level": "landmark"
+  },
+  {
+   "id": "khao-50-pi",
+   "province": "Phuket",
+   "district": "Kathu",
+   "name": "Khao 50 Pi, Patong",
+   "lat": 7.9005,
+   "lon": 98.306,
+   "aliases": [
+    "เขา 50 ปี",
+    "เขา50ปี",
+    "เนิน 50 ปี",
+    "เนิน50ปี",
+    "50 ปี ป่าตอง",
+    "khao 50 pi",
+    "50-year hill",
+    "50 year hill"
+   ],
+   "unique": true,
+   "level": "landmark"
+  },
+  {
+   "id": "patong-hill",
+   "province": "Phuket",
+   "district": "Kathu",
+   "name": "Patong Hill",
+   "lat": 7.893,
+   "lon": 98.318,
+   "aliases": [
+    "เขาพระบารมี",
+    "เนินพระบารมี",
+    "patong hill",
+    "phra barami"
+   ],
+   "unique": true,
+   "level": "landmark"
+  },
+  {
+   "id": "kathu",
+   "province": "Phuket",
+   "district": "Kathu",
+   "name": "Kathu",
+   "lat": 7.9137,
+   "lon": 98.333,
+   "aliases": [
+    "กะทู้",
+    "kathu"
+   ],
+   "unique": true,
+   "level": "area"
+  },
+  {
+   "id": "karon",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Karon",
+   "lat": 7.8466,
+   "lon": 98.2945,
+   "aliases": [
+    "กะรน",
+    "karon"
+   ],
+   "unique": true,
+   "level": "area"
+  },
+  {
+   "id": "kata",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Kata",
+   "lat": 7.82,
+   "lon": 98.299,
+   "aliases": [
+    "กะตะ",
+    "kata beach",
+    "หาดกะตะ"
+   ],
+   "unique": true,
+   "level": "area"
+  },
+  {
+   "id": "rawai",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Rawai",
+   "lat": 7.779,
+   "lon": 98.325,
+   "aliases": [
+    "ราไวย์",
+    "rawai"
+   ],
+   "unique": true,
+   "level": "area"
+  },
+  {
+   "id": "nai-harn",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Nai Harn",
+   "lat": 7.778,
+   "lon": 98.305,
+   "aliases": [
+    "ในหาน",
+    "nai harn",
+    "nai han"
+   ],
+   "unique": true,
+   "level": "area"
+  },
+  {
+   "id": "chalong",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Chalong",
+   "lat": 7.8467,
+   "lon": 98.338,
+   "aliases": [
+    "ต.ฉลอง",
+    "ตำบลฉลอง",
+    "แยกฉลอง",
+    "ห้าแยกฉลอง",
+    "วงเวียนฉลอง",
+    "วัดฉลอง",
+    "อ่าวฉลอง",
+    "chalong"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "khok-tanot",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Khok Tanot junction, Chalong",
+   "lat": 7.844,
+   "lon": 98.3345,
+   "aliases": [
+    "โคกโตนด",
+    "khok tanot"
+   ],
+   "unique": true,
+   "level": "landmark"
+  },
+  {
+   "id": "wichit",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Wichit",
+   "lat": 7.858,
+   "lon": 98.381,
+   "aliases": [
+    "วิชิต",
+    "wichit"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "phuket-town",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Phuket Town",
+   "lat": 7.8804,
+   "lon": 98.3923,
+   "aliases": [
+    "ตัวเมืองภูเก็ต",
+    "เทศบาลนครภูเก็ต",
+    "เมืองภูเก็ต",
+    "phuket town",
+    "phuket city",
+    "old town",
+    "เมืองเก่า",
+    "ตลาดใหญ่",
+    "ถนนถลาง",
+    "ถนนเยาวราช ภูเก็ต"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "bang-yai-canal",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Bang Yai canal (Phuket Town)",
+   "lat": 7.887,
+   "lon": 98.388,
+   "aliases": [
+    "คลองบางใหญ่",
+    "บางใหญ่",
+    "bang yai canal",
+    "khlong bang yai"
+   ],
+   "unique": true,
+   "level": "landmark"
+  },
+  {
+   "id": "sam-kong",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Sam Kong",
+   "lat": 7.902,
+   "lon": 98.388,
+   "aliases": [
+    "สามกอง",
+    "sam kong"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "ratsada",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Ratsada",
+   "lat": 7.905,
+   "lon": 98.405,
+   "aliases": [
+    "ต.รัษฎา",
+    "ตำบลรัษฎา",
+    "รัษฎา ภูเก็ต",
+    "ratsada"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "ko-kaeo",
+   "province": "Phuket",
+   "district": "Mueang Phuket",
+   "name": "Ko Kaeo",
+   "lat": 7.945,
+   "lon": 98.39,
+   "aliases": [
+    "เกาะแก้ว",
+    "ko kaeo",
+    "koh kaew"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "kamala",
+   "province": "Phuket",
+   "district": "Kathu",
+   "name": "Kamala",
+   "lat": 7.953,
+   "lon": 98.284,
+   "aliases": [
+    "กมลา",
+    "kamala"
+   ],
+   "unique": true,
+   "level": "area"
+  },
+  {
+   "id": "surin-beach",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Surin Beach",
+   "lat": 7.975,
+   "lon": 98.28,
+   "aliases": [
+    "หาดสุรินทร์",
+    "surin beach"
+   ],
+   "level": "landmark"
+  },
+  {
+   "id": "cherng-talay",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Choeng Thale / Bang Tao",
+   "lat": 7.995,
+   "lon": 98.296,
+   "aliases": [
+    "เชิงทะเล",
+    "บางเทา",
+    "cherng talay",
+    "choeng thale",
+    "bang tao",
+    "laguna"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "si-sunthon",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Si Sunthon",
+   "lat": 7.98,
+   "lon": 98.34,
+   "aliases": [
+    "ศรีสุนทร",
+    "si sunthon"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "thalang",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Thalang",
+   "lat": 8.03,
+   "lon": 98.335,
+   "aliases": [
+    "อ.ถลาง",
+    "อำเภอถลาง",
+    "ถลาง ภูเก็ต",
+    "thalang"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "thep-krasattri",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Thep Krasattri",
+   "lat": 8.045,
+   "lon": 98.34,
+   "aliases": [
+    "เทพกระษัตรี",
+    "thep krasattri"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "pa-khlok",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Pa Khlok",
+   "lat": 8.035,
+   "lon": 98.395,
+   "aliases": [
+    "ป่าคลอก",
+    "pa khlok"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "sakhu",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Sakhu",
+   "lat": 8.09,
+   "lon": 98.3,
+   "aliases": [
+    "ต.สาคู",
+    "ตำบลสาคู",
+    "sakhu"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "mai-khao",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Mai Khao",
+   "lat": 8.15,
+   "lon": 98.3,
+   "aliases": [
+    "ต.ไม้ขาว",
+    "หาดไม้ขาว",
+    "mai khao"
+   ],
+   "level": "area"
+  },
+  {
+   "id": "airport",
+   "province": "Phuket",
+   "district": "Thalang",
+   "name": "Phuket Airport",
+   "lat": 8.1132,
+   "lon": 98.3169,
+   "aliases": [
+    "สนามบินภูเก็ต",
+    "ท่าอากาศยานภูเก็ต",
+    "phuket airport",
+    "hkt"
+   ],
+   "level": "landmark"
+  }
+ ]
+}

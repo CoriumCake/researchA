@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flood Situation Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>Flood Situation Map</h1>
+      <span class="sub">Public posts sorted by Claude · <b>unverified</b>, please confirm before sending a team</span>
+    </div>
+    <div class="kpis" id="kpis"></div>
+    <div class="actions">
+      <span id="status" class="muted"></span>
+      <button id="open-settings" class="secondary" title="Search terms, sources and limits">⚙ Monitoring settings</button>
+      <button id="refresh" title="Fetch new posts from sources and categorize them">Fetch now</button>
+    </div>
+  </header>
+
+  <dialog id="settings">
+    <form id="settings-form" method="dialog">
+      <div class="dlg-head">
+        <h2>What to monitor</h2>
+        <button type="button" class="link" id="s-close" aria-label="Close">✕</button>
+      </div>
+
+      <fieldset>
+        <legend>Topic</legend>
+        <label>Situation Claude should look for
+          <input name="topic" maxlength="60" placeholder="flood" required />
+        </label>
+        <p class="hint">Used in Claude's instructions, e.g. "flood", "wildfire smoke", "landslide".</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Search terms</legend>
+        <label>One per line. A line with spaces is searched as an exact phrase.
+          <textarea name="queries" rows="6" required></textarea>
+        </label>
+        <div class="xq">
+          <div class="xq-head">
+            <span>X search query</span>
+            <span id="xq-len" class="muted"></span>
+          </div>
+          <label class="inline"><input type="checkbox" id="xq-custom" /> Write my own X query (advanced)</label>
+          <textarea name="xQuery" id="xq-text" rows="3" maxlength="512" hidden
+            placeholder='(น้ำท่วม OR "ติดอยู่บนหลังคา" OR #น้ำท่วม) -is:retweet'></textarea>
+          <code id="xq-preview"></code>
+          <p class="hint">Changing terms makes the next X fetch look back up to <span id="xq-lookback">24</span> h for matches.</p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Sources</legend>
+        <div id="s-sources" class="sources"></div>
+        <label>Mastodon hashtags (comma-separated)
+          <input name="mastodonTags" placeholder="thailandflood, น้ำท่วม" />
+        </label>
+      </fieldset>
+
+      <fieldset class="grid2">
+        <legend>Limits &amp; schedule</legend>
+        <label>Ignore posts older than (days)
+          <input type="number" name="maxPostAgeDays" min="1" max="30" required />
+        </label>
+        <label>X posts per fetch
+          <input type="number" name="xMaxPostsPerRun" min="10" max="500" required />
+        </label>
+        <label>X daily post budget
+          <input type="number" name="xDailyBudget" min="0" max="100000" required />
+          <span id="budget-cost" class="hint"></span>
+        </label>
+        <label>Auto-fetch every (minutes)
+          <input type="number" name="pollMinutes" min="2" max="1440" required />
+        </label>
+        <label class="inline"><input type="checkbox" name="liveIngest" /> Auto-fetch on</label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Categorizing model</legend>
+        <label>Claude model that reads each post
+          <select name="extractModel">
+            <option value="claude-haiku-5-5">Haiku 5.5 — cheapest (≈ $0.01 per 100 posts)</option>
+            <option value="claude-sonnet-5-5">Sonnet 5.5 — middle (≈ $0.25 per 100 posts)</option>
+            <option value="claude-opus-5-5">Opus 5.5 — most careful (≈ $0.55 per 100 posts)</option>
+          </select>
+        </label>
+        <p class="hint">In a 27-post test, Haiku agreed with Opus on relevance for 25 posts; the 2 differences were borderline. Each label records which model made it.</p>
+      </fieldset>
+
+      <p id="s-msg" class="hint" role="status"></p>
+      <div class="dlg-actions">
+        <button type="button" class="link" id="s-reset">Reset to .env defaults</button>
+        <span></span>
+        <button type="button" class="secondary" id="s-cancel">Cancel</button>
+        <button type="submit" id="s-save">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div class="filters" id="filters">
+    <label>Time
+      <select id="f-since">
+        <option value="6">Last 6 h</option>
+        <option value="24" selected>Last 24 h</option>
+        <option value="72">Last 3 days</option>
+        <option value="168">Last 7 days</option>
+        <option value="0">All</option>
+      </select>
+    </label>
+    <label>Min. urgency
+      <select id="f-urgency">
+        <option value="">Any</option>
+        <option value="medium">Medium+</option>
+        <option value="high">High+</option>
+        <option value="critical">Critical only</option>
+      </select>
+    </label>
+    <label>Posted by
+      <select id="f-by">
+        <option value="">Anyone</option>
+        <option value="citizen">Citizens only</option>
+        <option value="official">Agencies + media</option>
+      </select>
+    </label>
+    <label>Map layer
+      <select id="f-layer">
+        <option value="both">Reports + provinces</option>
+        <option value="markers">Reports only</option>
+        <option value="choropleth">Provinces only</option>
+      </select>
+    </label>
+    <div class="chips" id="f-cats"></div>
+  </div>
+
+  <main>
+    <section id="map-wrap">
+      <div id="map"></div>
+      <div class="legend" id="legend"></div>
+    </section>
+
+    <aside>
+      <form id="ask">
+        <label for="q">Ask the data</label>
+        <div class="askrow">
+          <input id="q" placeholder="e.g. rescue requests by province in the last 24h · หาดใหญ่ต้องการอะไรบ้าง" autocomplete="off" />
+          <button type="submit">Show</button>
+        </div>
+        <div class="examples" id="examples"></div>
+      </form>
+
+      <div id="answer" hidden>
+        <div class="answer-head">
+          <h2 id="a-title"></h2>
+          <button id="a-clear" class="link">Clear</button>
+        </div>
+        <p id="a-expl" class="muted"></p>
+        <div class="chart-box"><canvas id="chart"></canvas></div>
+        <details>
+          <summary>Table view &amp; spec</summary>
+          <table id="a-table"></table>
+          <pre id="a-spec"></pre>
+        </details>
+      </div>
+
+      <details id="quality" open>
+        <summary><h2>Source quality</h2> <span class="muted" id="q-window"></span></summary>
+        <p class="hint">Share of collected posts that Claude judged to be about a real, current situation.</p>
+        <table id="q-sources" class="qtable"></table>
+        <h3>X search queries</h3>
+        <ol id="q-queries" class="qlist"></ol>
+      </details>
+
+      <h2 class="list-head">Most urgent <span id="list-count" class="muted"></span></h2>
+      <ol id="list"></ol>
+    </aside>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
